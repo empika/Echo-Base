@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="application/css/echobase.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Echo Base</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="span12">
+          <h1>Search the echonest</h1>
+          <form class="well form-inline search">
+            <input type="text" class="input-large" id="artist" placeholder="Artist">
+            <input type="text" class="input-large" id="title" placeholder="Track">
+            <button class="btn" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+      <div class="row" id="results">
+        <div class="span12">
+        </div>
+      </div>
+    </div>
+          
+    <!-- Script tags go here -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="vendor/underscore/underscore-min.js"></script>
+    <script src="application/js/config.js"></script>
+    <script src="application/js/echobase.js"></script>
+    
+    <!-- Templates -->
+    <script type="text/template" id="results-table">
+      <h2>Results for: <%= query %></h2>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Artist</th>
+            <th>Track title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% _.each(songs, function(song){ %>
+            <tr>
+              <td>
+                <%= song.artist_name %>
+              </td>
+              <td>
+                <a href="#" data-id="<%= song.id %>"><%= song.title %></a>
+              </td>
+            </tr>
+          <%  }); %>
+        </tbody>
+      </table>
+    </script>
+    
+    <script type="text/template" id="song-profile-table">
+      <h2>Track details:</h2>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Artist
+            </td>
+            <td>
+              <%= song.artist_name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Track title
+            </td>
+            <td>
+              <%= song.title %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Tempo
+            </td>
+            <td>
+              <%= song.audio_summary.tempo %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </script>
+  </body>
+</html>
